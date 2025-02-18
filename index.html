@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios Request Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Request Sample</h1>
+
+    <!-- Form to get data -->
+    <form id="myForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response">
+        <p>Response will appear here.</p>
+    </div>
+
+    <script>
+        // Attach event listener to the form submit event
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form from refreshing the page
+
+            const username = document.getElementById('username').value;
+
+            axios.get('http://127.0.0.1:8000/run')
+            .then(function (response) {
+                console.log('omg')
+                document.getElementById('response').innerHTML = `<p>Response: ${response.data.message}</p>`;
+            })
+            .catch(function (error) {
+                document.getElementById('response').innerHTML = `<p>Error: ${error.response ? error.response.data : error.message}</p>`;
+            });
+        });
+    </script>
+</body>
+</html>
